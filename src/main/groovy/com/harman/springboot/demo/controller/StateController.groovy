@@ -1,6 +1,7 @@
 package com.harman.springboot.demo.controller
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -31,9 +32,15 @@ class StateController {
 	}
 
 	/*---Get a record list---*/
-	@GetMapping("/state")
+	@RequestMapping(value ="/state", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
 	def list(){
 		return stateService.list()
+	}
+
+	/*---Show pagination---*/
+	@RequestMapping(value ="/state-page/{pageNo}/{pageSize}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+	def showStatePage(@PathVariable("pageNo") int pageNo, @PathVariable("pageSize") int pageSize){
+		return stateService.findPage(pageNo, pageSize)
 	}
 
 	/*---Get a record by id---*/

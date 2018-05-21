@@ -26,7 +26,7 @@ class Role {
 	String roleName
 
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, mappedBy="role")
-	Set<User> users
+	Set<AppUser> users
 
 	@Override
 	public String toString() {

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.harman.springboot.demo.domain.Role;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Long>{
-
+interface RoleRepository extends JpaRepository<Role, Long>{
+	public Role findByRoleId(Long roleId);
 }

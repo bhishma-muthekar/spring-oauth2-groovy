@@ -24,7 +24,8 @@ class Country {
 	String name
 
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="country")
-	List<State> state
+	List<State> state
+
 
 	@Override
 	public String toString() {

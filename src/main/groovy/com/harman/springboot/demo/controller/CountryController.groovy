@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
 
 import com.harman.springboot.demo.domain.Country
+import com.harman.springboot.demo.exception.EntityNotFoundException
 import com.harman.springboot.demo.service.CountryService
 
 @RestController
@@ -33,14 +34,18 @@ class CountryController {
 
 	/*---Get a record list---*/
 	@GetMapping(value="/country", produces=MediaType.APPLICATION_JSON_VALUE)
-	def List<Country> list(){		
+	def List<Country> list(){
 		return countryService.list()
 	}
 
 	/*---Get a record by id---*/
 	@GetMapping("/country/{id}")
-	def get(@PathVariable("id") Long id) {
-		return countryService.get(id);
+	def get(@PathVariable("id") Long id) throws EntityNotFoundException{
+		Country country=countryService.get(id)
+		if (country==null) {
+			throw new EntityNotFoundException("Resource Not found with id:"+id)
+		}
+		return country;
 	}
 
 	/*---Update a record by id---*/
